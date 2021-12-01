@@ -8,6 +8,8 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    schema: classpath:schema.sql
+    initialization-mode: always
 logging:
   level:
     root: info
