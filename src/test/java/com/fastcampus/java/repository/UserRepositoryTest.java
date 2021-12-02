@@ -1,5 +1,6 @@
 package com.fastcampus.java.repository;
 
+import com.fastcampus.java.model.entity.Item;
 import com.fastcampus.java.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -34,11 +35,17 @@ public class UserRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void read() {
-        Optional<User> user = userRepository.findById(2L);
+        Optional<User> user = userRepository.findByAccountAndEmail("TestUser03","TestUser03@gmail.com");
 
-        user.ifPresent(selectUser -> {
-            Assertions.assertNotNull(selectUser);
+        user.ifPresent(selectUser ->{
+
+            selectUser.getOrderDetailList().stream().forEach(detail ->{
+                Item item = detail.getItem();
+                System.out.println(item);
+            });
+
         });
     }
 
