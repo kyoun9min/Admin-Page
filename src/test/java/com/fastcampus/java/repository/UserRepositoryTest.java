@@ -1,5 +1,7 @@
 package com.fastcampus.java.repository;
 
+import com.fastcampus.java.component.LoginUserAuditorAware;
+import com.fastcampus.java.config.JpaConfig;
 import com.fastcampus.java.model.entity.Item;
 import com.fastcampus.java.model.entity.User;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DisplayName("UserRepository 테스트")
+@Import({JpaConfig.class, LoginUserAuditorAware.class})
 public class UserRepositoryTest {
 
     @Autowired
@@ -29,8 +33,8 @@ public class UserRepositoryTest {
         String email = "Test01@gmail.com";
         String phoneNumber = "010-1111-2222";
         LocalDateTime registeredAt = LocalDateTime.now();
-        LocalDateTime createdAt = LocalDateTime.now();
-        String createdBy = "AdminServer";
+//        LocalDateTime createdAt = LocalDateTime.now();
+//        String createdBy = "AdminServer";
 
         User user = new User();
         user.setAccount(account);
@@ -39,8 +43,8 @@ public class UserRepositoryTest {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
+//        user.setCreatedAt(createdAt);
+//        user.setCreatedBy(createdBy);
 
         User newUser = userRepository.save(user);
         Assertions.assertNotNull(newUser);
