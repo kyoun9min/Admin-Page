@@ -1,6 +1,7 @@
 package com.fastcampus.java.controller;
 
 import com.fastcampus.java.model.SearchParam;
+import com.fastcampus.java.model.network.Header;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,4 +31,10 @@ public class GetController {
 
         return searchParam;
     }
+
+    @GetMapping("/header")
+    public Header getHeader() {
+        return Header.builder().resultCode("OK").descrption("OK").build();
+    }
+
 }
