@@ -39,7 +39,11 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
     @Override
     public Header<UserApiResponse> read(Long id) {
-        return null;
+        return userRepository.findById(id)
+                .map(user -> response(user))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
     }
 
     @Override
